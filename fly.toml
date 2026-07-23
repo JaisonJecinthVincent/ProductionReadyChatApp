@@ -1,6 +1,6 @@
 # See https://fly.io/docs/reference/configuration/ for a reference
 
-app = 'production-ready-chat'
+app = 'productionreadychatapp'
 primary = 'app'
 
 [build]
