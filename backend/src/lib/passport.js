@@ -1,21 +1,8 @@
 import dotenv from 'dotenv';
-import { fileURLToPath } from "url";
-import path from "path";
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+dotenv.config();
 
-dotenv.config({ path: "E:/ChatAppWithMERN/fullstack-chat-app/backend/.env" });
-console.log("PORT:", process.env.PORT);
-
-
-console.log("dotenv loaded?", process.env.PORT);
-console.log(`GOOGLE_CLIENT_ID: ${process.env.GOOGLE_CLIENT_ID}`);
 import passport from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
-// import { Strategy as GitHubStrategy } from 'passport-github2';
-// import { Strategy as FacebookStrategy } from 'passport-facebook';
-// import { Strategy as TwitterStrategy } from 'passport-twitter';
-// import { Strategy as LinkedInStrategy } from 'passport-linkedin-oauth2';
 import User from '../models/user.model.js';
 import jwt from 'jsonwebtoken';
 
@@ -110,20 +97,24 @@ const createOrUpdateUser = async (profile, provider, accessToken, refreshToken) 
   }
 };
 
-console.log(`GOOGLE_CLIENT_ID: ${process.env.GOOGLE_CLIENT_ID}`);
-// Google OAuth Strategy
-passport.use(new GoogleStrategy({
-  clientID: process.env.GOOGLE_CLIENT_ID,
-  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: process.env.GOOGLE_CALLBACK_URL || "/api/auth/oauth/google/callback"
-}, async (accessToken, refreshToken, profile, done) => {
-  try {
-    const user = await createOrUpdateUser(profile, 'google', accessToken, refreshToken);
-    done(null, user);
-  } catch (error) {
-    done(error, null);
-  }
-}));
+// Google OAuth Strategy - only initialize if credentials are provided
+if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
+  passport.use(new GoogleStrategy({
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: process.env.GOOGLE_CALLBACK_URL || "/api/auth/oauth/google/callback"
+  }, async (accessToken, refreshToken, profile, done) => {
+    try {
+      const user = await createOrUpdateUser(profile, 'google', accessToken, refreshToken);
+      done(null, user);
+    } catch (error) {
+      done(error, null);
+    }
+  }));
+  console.log('✅ Google OAuth strategy initialized');
+} else {
+  console.log('⚠️  Google OAuth disabled (GOOGLE_CLIENT_ID/SECRET not set)');
+}
 
 // Commented out other strategies for now
 // passport.use(new GitHubStrategy({
@@ -157,7 +148,7 @@ passport.use(new GoogleStrategy({
 //   consumerKey: process.env.TWITTER_CONSUMER_KEY,
 //   consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
 //   callbackURL: process.env.TWITTER_CALLBACK_URL || "/api/auth/twitter/callback"
-// }, async (token, tokenSecret, profile, done) => {
+// }, (token, tokenSecret, profile, done) => {
 //   try {
 //     const user = await createOrUpdateUser(profile, 'twitter', token, tokenSecret);
 //     done(null, user);
@@ -179,9 +170,6 @@ passport.use(new GoogleStrategy({
 //     done(error, null);
 //   }
 // }));
-
-console.log('GOOGLE_CLIENT_ID:', process.env.GOOGLE_CLIENT_ID);
-console.log('GOOGLE_CLIENT_SECRET:', process.env.GOOGLE_CLIENT_SECRET);
 
 export default passport;
 
