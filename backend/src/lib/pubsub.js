@@ -1,5 +1,6 @@
 import Redis from 'ioredis';
 import { getReceiverSocketId } from './socket.js';
+import { redisConfig } from '../config/redis.config.js';
 
 // Function to get Socket.IO instance dynamically
 async function getSocketIO() {
@@ -12,28 +13,22 @@ async function getSocketIO() {
   }
 }
 
-// Create Redis clients for pub/sub with better error handling  
-const publisher = new Redis({
-  host: process.env.REDIS_HOST || 'localhost',
-  port: process.env.REDIS_PORT || 6379,
-  password: process.env.REDIS_PASSWORD || undefined,
+const redisOpts = {
+  host: redisConfig.host,
+  port: redisConfig.port,
+  password: redisConfig.password,
+  tls: redisConfig.tls,
   retryDelayOnFailover: 1000,
   maxRetriesPerRequest: 3,
   lazyConnect: false,
   connectTimeout: 5000,
   enableReadyCheck: true,
-});
+};
 
-const subscriber = new Redis({
-  host: process.env.REDIS_HOST || 'localhost',
-  port: process.env.REDIS_PORT || 6379,
-  password: process.env.REDIS_PASSWORD || undefined,
-  retryDelayOnFailover: 1000,
-  maxRetriesPerRequest: 3,
-  lazyConnect: false,
-  connectTimeout: 5000,
-  enableReadyCheck: true,
-});
+// Create Redis clients for pub/sub with better error handling  
+const publisher = new Redis(redisOpts);
+
+const subscriber = new Redis(redisOpts);
 
 class PubSubManager {
   constructor() {

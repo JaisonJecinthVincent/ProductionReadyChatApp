@@ -1,9 +1,8 @@
 import dotenv from 'dotenv';
-import tls from 'tls';
 
 dotenv.config();
 
-const useTls = process.env.REDIS_TLS === 'true' || parseInt(process.env.REDIS_PORT) === 16379 || parseInt(process.env.REDIS_PORT) === 16640;
+const useTls = process.env.REDIS_TLS === 'true';
 
 // Centralized Redis configuration - single source of truth
 export const redisConfig = {
