@@ -15,6 +15,7 @@ test-*
 backend/test-*
 backend/*-test.js
 fly.toml
+render.yaml
 README.md
 *.md
 !frontend/public/README.md
