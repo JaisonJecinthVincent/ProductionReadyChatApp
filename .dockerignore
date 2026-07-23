@@ -3,6 +3,7 @@ backend/node_modules
 frontend/node_modules
 frontend/dist
 .git
+.gitignore
 .env
 backend/.env
 frontend/.env
@@ -13,3 +14,15 @@ coverage
 test-*
 backend/test-*
 backend/*-test.js
+fly.toml
+README.md
+*.md
+!frontend/public/README.md
+*.yml
+*.yaml
+!pnpm-workspace.yaml
+*.dot
+*.png
+*.svg
+Architecture Diagrams/
+Architecture Diagrams*/

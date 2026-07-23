@@ -1,13 +1,17 @@
 import dotenv from 'dotenv';
+import tls from 'tls';
 
 dotenv.config();
+
+const useTls = process.env.REDIS_TLS === 'true' || parseInt(process.env.REDIS_PORT) === 16379 || parseInt(process.env.REDIS_PORT) === 16640;
 
 // Centralized Redis configuration - single source of truth
 export const redisConfig = {
   host: process.env.REDIS_HOST || 'localhost',
-  port: process.env.REDIS_PORT || 6379,
+  port: parseInt(process.env.REDIS_PORT) || 6379,
   password: process.env.REDIS_PASSWORD || undefined,
-  db: process.env.REDIS_DB || 0,
+  db: parseInt(process.env.REDIS_DB) || 0,
+  tls: useTls ? { rejectUnauthorized: false } : undefined,
 };
 
 // Bull-compatible Redis options (minimal configuration)
@@ -17,6 +21,7 @@ export const bullRedisConfig = {
     port: redisConfig.port,
     password: redisConfig.password,
     db: redisConfig.db,
+    tls: redisConfig.tls,
     // Simplified settings for Bull compatibility
     maxRetriesPerRequest: 3,
     retryDelayOnFailover: 100,

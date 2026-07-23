@@ -1,11 +1,14 @@
+const esApiKey = process.env.ELASTICSEARCH_API_KEY;
+const esUsername = process.env.ELASTICSEARCH_USERNAME;
+const esPassword = process.env.ELASTICSEARCH_PASSWORD;
+
 export const elasticsearchConfig = {
   node: process.env.ELASTICSEARCH_URL || 'http://127.0.0.1:9200',
-  auth: process.env.ELASTICSEARCH_USERNAME && process.env.ELASTICSEARCH_PASSWORD
-    ? {
-        username: process.env.ELASTICSEARCH_USERNAME,
-        password: process.env.ELASTICSEARCH_PASSWORD
-      }
-    : undefined,
+  auth: esApiKey
+    ? { apiKey: esApiKey }
+    : esUsername && esPassword
+      ? { username: esUsername, password: esPassword }
+      : undefined,
   maxRetries: 3,
   requestTimeout: 10000,
   sniffOnStart: false,

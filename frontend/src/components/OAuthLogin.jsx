@@ -31,7 +31,7 @@ const OAuthLogin = ({ onSuccess, onError }) => {
   const handleOAuthLogin = (provider) => {
     setLoading(true);
     // Redirect to OAuth provider
-    window.location.href = `http://localhost:5000/api/auth/oauth/${provider}`;
+    window.location.href = `/api/auth/oauth/${provider}`;
   };
 
   const getProviderIcon = (provider) => {
