@@ -1,0 +1,214 @@
+﻿strict digraph "dependency-cruiser output"{
+    rankdir="LR" splines="true" overlap="false" nodesep="0.16" ranksep="0.18" fontname="Helvetica-bold" fontsize="9" style="rounded,bold,filled" fillcolor="#ffffff" compound="true"
+    node [shape="box" style="rounded, filled" height="0.2" color="black" fillcolor="#ffffcc" fontcolor="black" fontname="Helvetica" fontsize="9"]
+    edge [arrowhead="normal" arrowsize="0.6" penwidth="2.0" color="#00000033" fontname="Helvetica" fontsize="9"]
+
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" "backend/src/app.js" [label=<app.js> tooltip="app.js" URL="backend/src/app.js" ] } }
+    "backend/src/app.js" -> "backend/src/lib/db.js"
+    "backend/src/app.js" -> "backend/src/lib/passport.js"
+    "backend/src/app.js" -> "backend/src/middleware/performanceMonitor.js"
+    "backend/src/app.js" -> "backend/src/middleware/rateLimiter.js"
+    "backend/src/app.js" -> "backend/src/routes/auth.route.js"
+    "backend/src/app.js" -> "backend/src/routes/file-test.route.js"
+    "backend/src/app.js" -> "backend/src/routes/file.route.js"
+    "backend/src/app.js" -> "backend/src/routes/group.route.js"
+    "backend/src/app.js" -> "backend/src/routes/message.route.js"
+    "backend/src/app.js" -> "node_modules/cookie-parser" [penwidth="1.0"]
+    "backend/src/app.js" -> "node_modules/cors" [penwidth="1.0"]
+    "backend/src/app.js" -> "node_modules/dotenv" [penwidth="1.0"]
+    "backend/src/app.js" -> "node_modules/express" [penwidth="1.0"]
+    "backend/src/app.js" -> "node_modules/express-session" [penwidth="1.0"]
+    "backend/src/app.js" -> "node_modules/passport" [penwidth="1.0"]
+    "backend/src/app.js" -> "path" [style="dashed" penwidth="1.0"]
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" "backend/src/cluster.js" [label=<cluster.js> tooltip="cluster.js" URL="backend/src/cluster.js" ] } }
+    "backend/src/cluster.js" -> "backend/src/app.js" [style="dashed"]
+    "backend/src/cluster.js" -> "cluster" [style="dashed" penwidth="1.0"]
+    "backend/src/cluster.js" -> "os" [style="dashed" penwidth="1.0"]
+    "backend/src/cluster.js" -> "path" [style="dashed" penwidth="1.0"]
+    "backend/src/cluster.js" -> "url" [style="dashed" penwidth="1.0"]
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" subgraph "cluster_backend/src/config" {label="config" "backend/src/config/redis.config.js" [label=<redis.config.js> tooltip="redis.config.js" URL="backend/src/config/redis.config.js" ] } } }
+    "backend/src/config/redis.config.js" -> "node_modules/dotenv" [penwidth="1.0"]
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" subgraph "cluster_backend/src/controllers" {label="controllers" "backend/src/controllers/auth.controller.js" [label=<auth.controller.js> tooltip="auth.controller.js" URL="backend/src/controllers/auth.controller.js" ] } } }
+    "backend/src/controllers/auth.controller.js" -> "backend/src/lib/cloudinary.js"
+    "backend/src/controllers/auth.controller.js" -> "backend/src/lib/utils.js"
+    "backend/src/controllers/auth.controller.js" -> "backend/src/models/user.model.js"
+    "backend/src/controllers/auth.controller.js" -> "node_modules/bcryptjs" [penwidth="1.0"]
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" subgraph "cluster_backend/src/controllers" {label="controllers" "backend/src/controllers/file.controller.js" [label=<file.controller.js> tooltip="file.controller.js" URL="backend/src/controllers/file.controller.js" ] } } }
+    "backend/src/controllers/file.controller.js" -> "backend/src/lib/cloudinary.js"
+    "backend/src/controllers/file.controller.js" -> "node_modules/multer" [penwidth="1.0"]
+    "backend/src/controllers/file.controller.js" -> "node_modules/multer-storage-cloudinary" [penwidth="1.0"]
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" subgraph "cluster_backend/src/controllers" {label="controllers" "backend/src/controllers/group.controller.js" [label=<group.controller.js> tooltip="group.controller.js" URL="backend/src/controllers/group.controller.js" ] } } }
+    "backend/src/controllers/group.controller.js" -> "backend/src/lib/cloudinary.js"
+    "backend/src/controllers/group.controller.js" -> "backend/src/lib/socket.js"
+    "backend/src/controllers/group.controller.js" -> "backend/src/models/group.model.js"
+    "backend/src/controllers/group.controller.js" -> "backend/src/models/message.model.js"
+    "backend/src/controllers/group.controller.js" -> "backend/src/models/user.model.js"
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" subgraph "cluster_backend/src/controllers" {label="controllers" "backend/src/controllers/message.controller.js" [label=<message.controller.js> tooltip="message.controller.js" URL="backend/src/controllers/message.controller.js" ] } } }
+    "backend/src/controllers/message.controller.js" -> "backend/src/lib/cloudinary.js"
+    "backend/src/controllers/message.controller.js" -> "backend/src/lib/pubsub.js"
+    "backend/src/controllers/message.controller.js" -> "backend/src/lib/queue.js"
+    "backend/src/controllers/message.controller.js" -> "backend/src/lib/redis.js"
+    "backend/src/controllers/message.controller.js" -> "backend/src/lib/socket.js"
+    "backend/src/controllers/message.controller.js" -> "backend/src/models/group.model.js"
+    "backend/src/controllers/message.controller.js" -> "backend/src/models/message.model.js"
+    "backend/src/controllers/message.controller.js" -> "backend/src/models/user.model.js"
+    "backend/src/controllers/message.controller.js" -> "node_modules/mongoose" [penwidth="1.0"]
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" "backend/src/index.js" [label=<index.js> tooltip="index.js" URL="backend/src/index.js" ] } }
+    "backend/src/index.js" -> "backend/src/lib/db.js"
+    "backend/src/index.js" -> "backend/src/lib/passport.js"
+    "backend/src/index.js" -> "backend/src/middleware/performanceMonitor.js"
+    "backend/src/index.js" -> "backend/src/middleware/rateLimiter.js"
+    "backend/src/index.js" -> "backend/src/routes/auth.route.js"
+    "backend/src/index.js" -> "backend/src/routes/file-test.route.js"
+    "backend/src/index.js" -> "backend/src/routes/file.route.js"
+    "backend/src/index.js" -> "backend/src/routes/group.route.js"
+    "backend/src/index.js" -> "backend/src/routes/message.route.js"
+    "backend/src/index.js" -> "backend/src/routes/oauth.route.js"
+    "backend/src/index.js" -> "node_modules/cookie-parser" [penwidth="1.0"]
+    "backend/src/index.js" -> "node_modules/cors" [penwidth="1.0"]
+    "backend/src/index.js" -> "node_modules/dotenv" [penwidth="1.0"]
+    "backend/src/index.js" -> "node_modules/express" [penwidth="1.0"]
+    "backend/src/index.js" -> "node_modules/express-session" [penwidth="1.0"]
+    "backend/src/index.js" -> "node_modules/passport" [penwidth="1.0"]
+    "backend/src/index.js" -> "path" [style="dashed" penwidth="1.0"]
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" subgraph "cluster_backend/src/lib" {label="lib" "backend/src/lib/cloudinary.js" [label=<cloudinary.js> tooltip="cloudinary.js" URL="backend/src/lib/cloudinary.js" ] } } }
+    "backend/src/lib/cloudinary.js" -> "node_modules/cloudinary" [penwidth="1.0"]
+    "backend/src/lib/cloudinary.js" -> "node_modules/dotenv" [penwidth="1.0"]
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" subgraph "cluster_backend/src/lib" {label="lib" "backend/src/lib/db.js" [label=<db.js> tooltip="db.js" URL="backend/src/lib/db.js" ] } } }
+    "backend/src/lib/db.js" -> "node_modules/mongoose" [penwidth="1.0"]
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" subgraph "cluster_backend/src/lib" {label="lib" "backend/src/lib/loadBalancer.js" [label=<loadBalancer.js> tooltip="loadBalancer.js" URL="backend/src/lib/loadBalancer.js" ] } } }
+    "backend/src/lib/loadBalancer.js" -> "node_modules/express" [penwidth="1.0"]
+    "backend/src/lib/loadBalancer.js" -> "http-proxy-middleware" [xlabel="not-to-unresolvable" tooltip="not-to-unresolvable" fontcolor="red" color="red"]
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" subgraph "cluster_backend/src/lib" {label="lib" "backend/src/lib/optimizedQuery.js" [label=<optimizedQuery.js> tooltip="optimizedQuery.js" URL="backend/src/lib/optimizedQuery.js" ] } } }
+    "backend/src/lib/optimizedQuery.js" -> "backend/src/lib/queryPerformanceMonitor.js"
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" subgraph "cluster_backend/src/lib" {label="lib" "backend/src/lib/passport.js" [label=<passport.js> tooltip="passport.js" URL="backend/src/lib/passport.js" ] } } }
+    "backend/src/lib/passport.js" -> "backend/src/models/user.model.js"
+    "backend/src/lib/passport.js" -> "node_modules/dotenv" [penwidth="1.0"]
+    "backend/src/lib/passport.js" -> "node_modules/jsonwebtoken" [penwidth="1.0"]
+    "backend/src/lib/passport.js" -> "node_modules/passport" [penwidth="1.0"]
+    "backend/src/lib/passport.js" -> "node_modules/passport-google-oauth20" [penwidth="1.0"]
+    "backend/src/lib/passport.js" -> "path" [style="dashed" penwidth="1.0"]
+    "backend/src/lib/passport.js" -> "url" [style="dashed" penwidth="1.0"]
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" subgraph "cluster_backend/src/lib" {label="lib" "backend/src/lib/performanceMonitor.js" [label=<performanceMonitor.js> tooltip="performanceMonitor.js" URL="backend/src/lib/performanceMonitor.js" ] } } }
+    "backend/src/lib/performanceMonitor.js" -> "backend/src/lib/redis.js"
+    "backend/src/lib/performanceMonitor.js" -> "cluster" [style="dashed" penwidth="1.0"]
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" subgraph "cluster_backend/src/lib" {label="lib" "backend/src/lib/publisher.js" [label=<publisher.js> tooltip="publisher.js" URL="backend/src/lib/publisher.js" ] } } }
+    "backend/src/lib/publisher.js" -> "backend/src/config/redis.config.js"
+    "backend/src/lib/publisher.js" -> "node_modules/ioredis" [penwidth="1.0"]
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" subgraph "cluster_backend/src/lib" {label="lib" "backend/src/lib/pubsub.js" [label=<pubsub.js> tooltip="pubsub.js" URL="backend/src/lib/pubsub.js" ] } } }
+    "backend/src/lib/pubsub.js" -> "backend/src/lib/socket.js"
+    "backend/src/lib/pubsub.js" -> "node_modules/ioredis" [penwidth="1.0"]
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" subgraph "cluster_backend/src/lib" {label="lib" "backend/src/lib/queryPerformanceMonitor.js" [label=<queryPerformanceMonitor.js> tooltip="queryPerformanceMonitor.js" URL="backend/src/lib/queryPerformanceMonitor.js" ] } } }
+    "backend/src/lib/queryPerformanceMonitor.js" -> "backend/src/lib/redis.js"
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" subgraph "cluster_backend/src/lib" {label="lib" "backend/src/lib/queue.js" [label=<queue.js> tooltip="queue.js" URL="backend/src/lib/queue.js" ] } } }
+    "backend/src/lib/queue.js" -> "backend/src/config/redis.config.js"
+    "backend/src/lib/queue.js" -> "node_modules/bull" [penwidth="1.0"]
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" subgraph "cluster_backend/src/lib" {label="lib" "backend/src/lib/queueAdmin.js" [label=<queueAdmin.js> tooltip="queueAdmin.js" URL="backend/src/lib/queueAdmin.js" ] } } }
+    "backend/src/lib/queueAdmin.js" -> "backend/src/lib/queue.js"
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" subgraph "cluster_backend/src/lib" {label="lib" "backend/src/lib/queueMonitor.js" [label=<queueMonitor.js> tooltip="queueMonitor.js" URL="backend/src/lib/queueMonitor.js" ] } } }
+    "backend/src/lib/queueMonitor.js" -> "backend/src/lib/queue.js"
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" subgraph "cluster_backend/src/lib" {label="lib" "backend/src/lib/redis.js" [label=<redis.js> tooltip="redis.js" URL="backend/src/lib/redis.js" ] } } }
+    "backend/src/lib/redis.js" -> "backend/src/config/redis.config.js"
+    "backend/src/lib/redis.js" -> "node_modules/ioredis" [penwidth="1.0"]
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" subgraph "cluster_backend/src/lib" {label="lib" "backend/src/lib/socket.js" [label=<socket.js> tooltip="socket.js" URL="backend/src/lib/socket.js" ] } } }
+    "backend/src/lib/socket.js" -> "backend/src/models/group.model.js"
+    "backend/src/lib/socket.js" -> "backend/src/models/user.model.js"
+    "backend/src/lib/socket.js" -> "backend/src/lib/redis.js"
+    "backend/src/lib/socket.js" -> "node_modules/@socket.io/redis-adapter" [penwidth="1.0"]
+    "backend/src/lib/socket.js" -> "cluster" [style="dashed" penwidth="1.0"]
+    "backend/src/lib/socket.js" -> "node_modules/socket.io" [penwidth="1.0"]
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" subgraph "cluster_backend/src/lib" {label="lib" "backend/src/lib/utils.js" [label=<utils.js> tooltip="utils.js" URL="backend/src/lib/utils.js" ] } } }
+    "backend/src/lib/utils.js" -> "node_modules/jsonwebtoken" [penwidth="1.0"]
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" subgraph "cluster_backend/src/lib" {label="lib" "backend/src/lib/workerPool.js" [label=<workerPool.js> tooltip="workerPool.js" URL="backend/src/lib/workerPool.js" ] } } }
+    "backend/src/lib/workerPool.js" -> "os" [style="dashed" penwidth="1.0"]
+    "backend/src/lib/workerPool.js" -> "path" [style="dashed" penwidth="1.0"]
+    "backend/src/lib/workerPool.js" -> "url" [style="dashed" penwidth="1.0"]
+    "backend/src/lib/workerPool.js" -> "worker_threads" [style="dashed" penwidth="1.0"]
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" subgraph "cluster_backend/src/middleware" {label="middleware" "backend/src/middleware/auth.middleware.js" [label=<auth.middleware.js> tooltip="auth.middleware.js" URL="backend/src/middleware/auth.middleware.js" ] } } }
+    "backend/src/middleware/auth.middleware.js" -> "backend/src/lib/redis.js"
+    "backend/src/middleware/auth.middleware.js" -> "backend/src/models/user.model.js"
+    "backend/src/middleware/auth.middleware.js" -> "node_modules/jsonwebtoken" [penwidth="1.0"]
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" subgraph "cluster_backend/src/middleware" {label="middleware" "backend/src/middleware/fileUpload.middleware.js" [label=<fileUpload.middleware.js> tooltip="fileUpload.middleware.js" URL="backend/src/middleware/fileUpload.middleware.js" ] } } }
+    "backend/src/middleware/fileUpload.middleware.js" -> "backend/src/lib/cloudinary.js"
+    "backend/src/middleware/fileUpload.middleware.js" -> "node_modules/multer" [penwidth="1.0"]
+    "backend/src/middleware/fileUpload.middleware.js" -> "node_modules/multer-storage-cloudinary" [penwidth="1.0"]
+    "backend/src/middleware/fileUpload.middleware.js" -> "path" [style="dashed" penwidth="1.0"]
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" subgraph "cluster_backend/src/middleware" {label="middleware" "backend/src/middleware/performanceMonitor.js" [label=<performanceMonitor.js> tooltip="performanceMonitor.js" URL="backend/src/middleware/performanceMonitor.js" ] } } }
+    "backend/src/middleware/performanceMonitor.js" -> "backend/src/lib/redis.js"
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" subgraph "cluster_backend/src/middleware" {label="middleware" "backend/src/middleware/rateLimiter.js" [label=<rateLimiter.js> tooltip="rateLimiter.js" URL="backend/src/middleware/rateLimiter.js" ] } } }
+    "backend/src/middleware/rateLimiter.js" -> "backend/src/lib/redis.js"
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" subgraph "cluster_backend/src/models" {label="models" "backend/src/models/group.model.js" [label=<group.model.js> tooltip="group.model.js" URL="backend/src/models/group.model.js" ] } } }
+    "backend/src/models/group.model.js" -> "node_modules/mongoose" [penwidth="1.0"]
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" subgraph "cluster_backend/src/models" {label="models" "backend/src/models/message.model.js" [label=<message.model.js> tooltip="message.model.js" URL="backend/src/models/message.model.js" ] } } }
+    "backend/src/models/message.model.js" -> "node_modules/mongoose" [penwidth="1.0"]
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" subgraph "cluster_backend/src/models" {label="models" "backend/src/models/user.model.js" [label=<user.model.js> tooltip="user.model.js" URL="backend/src/models/user.model.js" ] } } }
+    "backend/src/models/user.model.js" -> "node_modules/mongoose" [penwidth="1.0"]
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" subgraph "cluster_backend/src/routes" {label="routes" "backend/src/routes/auth.route.js" [label=<auth.route.js> tooltip="auth.route.js" URL="backend/src/routes/auth.route.js" ] } } }
+    "backend/src/routes/auth.route.js" -> "backend/src/controllers/auth.controller.js"
+    "backend/src/routes/auth.route.js" -> "backend/src/lib/passport.js"
+    "backend/src/routes/auth.route.js" -> "backend/src/middleware/auth.middleware.js"
+    "backend/src/routes/auth.route.js" -> "backend/src/middleware/rateLimiter.js"
+    "backend/src/routes/auth.route.js" -> "node_modules/express" [penwidth="1.0"]
+    "backend/src/routes/auth.route.js" -> "node_modules/jsonwebtoken" [penwidth="1.0"]
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" subgraph "cluster_backend/src/routes" {label="routes" "backend/src/routes/file-test.route.js" [label=<file-test.route.js> tooltip="file-test.route.js" URL="backend/src/routes/file-test.route.js" ] } } }
+    "backend/src/routes/file-test.route.js" -> "node_modules/express" [penwidth="1.0"]
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" subgraph "cluster_backend/src/routes" {label="routes" "backend/src/routes/file.route.js" [label=<file.route.js> tooltip="file.route.js" URL="backend/src/routes/file.route.js" ] } } }
+    "backend/src/routes/file.route.js" -> "backend/src/controllers/file.controller.js"
+    "backend/src/routes/file.route.js" -> "backend/src/lib/cloudinary.js"
+    "backend/src/routes/file.route.js" -> "backend/src/middleware/auth.middleware.js"
+    "backend/src/routes/file.route.js" -> "node_modules/axios" [penwidth="1.0"]
+    "backend/src/routes/file.route.js" -> "node_modules/express" [penwidth="1.0"]
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" subgraph "cluster_backend/src/routes" {label="routes" "backend/src/routes/group.route.js" [label=<group.route.js> tooltip="group.route.js" URL="backend/src/routes/group.route.js" ] } } }
+    "backend/src/routes/group.route.js" -> "backend/src/controllers/group.controller.js"
+    "backend/src/routes/group.route.js" -> "backend/src/controllers/message.controller.js"
+    "backend/src/routes/group.route.js" -> "backend/src/middleware/auth.middleware.js"
+    "backend/src/routes/group.route.js" -> "node_modules/express" [penwidth="1.0"]
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" subgraph "cluster_backend/src/routes" {label="routes" "backend/src/routes/message.route.js" [label=<message.route.js> tooltip="message.route.js" URL="backend/src/routes/message.route.js" ] } } }
+    "backend/src/routes/message.route.js" -> "backend/src/controllers/message.controller.js"
+    "backend/src/routes/message.route.js" -> "backend/src/middleware/auth.middleware.js"
+    "backend/src/routes/message.route.js" -> "backend/src/middleware/rateLimiter.js"
+    "backend/src/routes/message.route.js" -> "node_modules/express" [penwidth="1.0"]
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" subgraph "cluster_backend/src/routes" {label="routes" "backend/src/routes/monitoring.route.js" [label=<monitoring.route.js> tooltip="monitoring.route.js" URL="backend/src/routes/monitoring.route.js" ] } } }
+    "backend/src/routes/monitoring.route.js" -> "backend/src/lib/performanceMonitor.js"
+    "backend/src/routes/monitoring.route.js" -> "cluster" [style="dashed" penwidth="1.0"]
+    "backend/src/routes/monitoring.route.js" -> "node_modules/express" [penwidth="1.0"]
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" subgraph "cluster_backend/src/routes" {label="routes" "backend/src/routes/oauth.route.js" [label=<oauth.route.js> tooltip="oauth.route.js" URL="backend/src/routes/oauth.route.js" ] } } }
+    "backend/src/routes/oauth.route.js" -> "backend/src/lib/passport.js"
+    "backend/src/routes/oauth.route.js" -> "node_modules/express" [penwidth="1.0"]
+    "backend/src/routes/oauth.route.js" -> "node_modules/jsonwebtoken" [penwidth="1.0"]
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" subgraph "cluster_backend/src/seeds" {label="seeds" "backend/src/seeds/user.seed.js" [label=<user.seed.js> tooltip="user.seed.js" URL="backend/src/seeds/user.seed.js" ] } } }
+    "backend/src/seeds/user.seed.js" -> "backend/src/lib/db.js"
+    "backend/src/seeds/user.seed.js" -> "backend/src/models/user.model.js"
+    "backend/src/seeds/user.seed.js" -> "node_modules/dotenv" [penwidth="1.0"]
+    subgraph "cluster_backend" {label="backend" subgraph "cluster_backend/src" {label="src" subgraph "cluster_backend/src/workers" {label="workers" "backend/src/workers/cpu-worker.js" [label=<cpu-worker.js> tooltip="cpu-worker.js" URL="backend/src/workers/cpu-worker.js" ] } } }
+    "backend/src/workers/cpu-worker.js" -> "node_modules/bcryptjs" [penwidth="1.0"]
+    "backend/src/workers/cpu-worker.js" -> "util" [style="dashed" penwidth="1.0"]
+    "backend/src/workers/cpu-worker.js" -> "worker_threads" [style="dashed" penwidth="1.0"]
+    "backend/src/workers/cpu-worker.js" -> "zlib" [style="dashed" penwidth="1.0"]
+    "cluster" [label=<cluster> tooltip="cluster" URL="https://nodejs.org/api/cluster.html" color="grey" fontcolor="grey"]
+    "http-proxy-middleware" [label=<http-proxy-middleware> tooltip="http-proxy-middleware" ]
+    subgraph "cluster_node_modules" {label="node_modules" subgraph "cluster_node_modules/@socket.io" {label="@socket.io" "node_modules/@socket.io/redis-adapter" [label=<redis-adapter> tooltip="redis-adapter" URL="https://www.npmjs.com/package/@socket.io/redis-adapter" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] } }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/axios" [label=<axios> tooltip="axios" URL="https://www.npmjs.com/package/axios" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/bcryptjs" [label=<bcryptjs> tooltip="bcryptjs" URL="https://www.npmjs.com/package/bcryptjs" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/bull" [label=<bull> tooltip="bull" URL="https://www.npmjs.com/package/bull" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/cloudinary" [label=<cloudinary> tooltip="cloudinary" URL="https://www.npmjs.com/package/cloudinary" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/cookie-parser" [label=<cookie-parser> tooltip="cookie-parser" URL="https://www.npmjs.com/package/cookie-parser" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/cors" [label=<cors> tooltip="cors" URL="https://www.npmjs.com/package/cors" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/dotenv" [label=<dotenv> tooltip="dotenv" URL="https://www.npmjs.com/package/dotenv" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/express" [label=<express> tooltip="express" URL="https://www.npmjs.com/package/express" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/express-session" [label=<express-session> tooltip="express-session" URL="https://www.npmjs.com/package/express-session" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/ioredis" [label=<ioredis> tooltip="ioredis" URL="https://www.npmjs.com/package/ioredis" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/jsonwebtoken" [label=<jsonwebtoken> tooltip="jsonwebtoken" URL="https://www.npmjs.com/package/jsonwebtoken" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/mongoose" [label=<mongoose> tooltip="mongoose" URL="https://www.npmjs.com/package/mongoose" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/multer" [label=<multer> tooltip="multer" URL="https://www.npmjs.com/package/multer" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/multer-storage-cloudinary" [label=<multer-storage-cloudinary> tooltip="multer-storage-cloudinary" URL="https://www.npmjs.com/package/multer-storage-cloudinary" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/passport" [label=<passport> tooltip="passport" URL="https://www.npmjs.com/package/passport" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/passport-google-oauth20" [label=<passport-google-oauth20> tooltip="passport-google-oauth20" URL="https://www.npmjs.com/package/passport-google-oauth20" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/socket.io" [label=<socket.io> tooltip="socket.io" URL="https://www.npmjs.com/package/socket.io" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    "os" [label=<os> tooltip="os" URL="https://nodejs.org/api/os.html" color="grey" fontcolor="grey"]
+    "path" [label=<path> tooltip="path" URL="https://nodejs.org/api/path.html" color="grey" fontcolor="grey"]
+    "url" [label=<url> tooltip="url" URL="https://nodejs.org/api/url.html" color="grey" fontcolor="grey"]
+    "util" [label=<util> tooltip="util" URL="https://nodejs.org/api/util.html" color="grey" fontcolor="grey"]
+    "worker_threads" [label=<worker_threads> tooltip="worker_threads" URL="https://nodejs.org/api/worker_threads.html" color="grey" fontcolor="grey"]
+    "zlib" [label=<zlib> tooltip="zlib" URL="https://nodejs.org/api/zlib.html" color="grey" fontcolor="grey"]
+}

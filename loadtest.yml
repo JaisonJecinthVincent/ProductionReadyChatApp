@@ -1,0 +1,152 @@
+config:
+  target: "http://localhost:5000"
+  phases:
+    # Warm-up phase
+    - duration: 30
+      arrivalRate: 50
+      name: "Warm-up"
+    # Gradual ramp-up
+    - duration: 60
+      arrivalRate: 100
+      rampTo: 500
+      name: "Ramp-up"
+    # Sustained high load
+    - duration: 120
+      arrivalRate: 500
+      name: "Sustained load - 500 users/sec"
+    # Peak load test
+    - duration: 60
+      arrivalRate: 1000
+      name: "Peak load - 1000 users/sec"
+    # Stress test
+    - duration: 30
+      arrivalRate: 1500
+      name: "Stress test - 1500 users/sec"
+  http:
+    timeout: 30
+    pool: 50
+  variables:
+    testUsers:
+      - "testuser1@example.com:password123"
+      - "testuser2@example.com:password123"
+      - "testuser3@example.com:password123"
+      - "testuser4@example.com:password123"
+      - "testuser5@example.com:password123"
+
+scenarios:
+  - name: "Authentication Flow"
+    weight: 30
+    flow:
+      - post:
+          url: "/api/auth/signup"
+          json:
+            fullName: "Load Test User {{ $randomString() }}"
+            email: "loadtest{{ $randomInt(1, 10000) }}@example.com"
+            password: "LoadTest123!"
+          expect:
+            - statusCode: [201, 400] # 400 if user exists
+            - hasHeader: "set-cookie"
+          capture:
+            - json: "$.user.id"
+              as: "userId"
+      - post:
+          url: "/api/auth/login"
+          json:
+            email: "loadtest{{ $randomInt(1, 10000) }}@example.com"
+            password: "LoadTest123!"
+          expect:
+            - statusCode: [200, 400]
+
+  - name: "Message Operations"
+    weight: 40
+    flow:
+      # Login first
+      - post:
+          url: "/api/auth/login"
+          json:
+            email: "slanesh@gmail.com"
+            password: "Slanesh@5002"
+          expect:
+            - statusCode: 200
+          capture:
+            - json: "$.user.id"
+              as: "senderId"
+      # Get users list
+      - get:
+          url: "/api/messages/users"
+          expect:
+            - statusCode: 200
+          capture:
+            - json: "$[0].id"
+              as: "receiverId"
+      # Send messages
+      - loop:
+          count: 5
+          over:
+            - post:
+                url: "/api/messages/send/{{ receiverId }}"
+                json:
+                  text: "Load test message {{ $randomString() }}"
+                  image: null
+                expect:
+                  - statusCode: 201
+      # Get message history
+      - get:
+          url: "/api/messages/{{ receiverId }}"
+          expect:
+            - statusCode: 200
+
+  - name: "Group Operations"
+    weight: 20
+    flow:
+      # Login
+      - post:
+          url: "/api/auth/login"
+          json:
+            email: "slanesh@gmail.com"  
+            password: "Slanesh@5002"
+          expect:
+            - statusCode: 200
+          capture:
+            - json: "$.user.id"
+              as: "userId"
+      # Create group
+      - post:
+          url: "/api/groups"
+          json:
+            name: "Load Test Group {{ $randomString() }}"
+            members: []
+          expect:
+            - statusCode: [201, 400]
+          capture:
+            - json: "$.group.id"
+              as: "groupId"
+      # Get groups
+      - get:
+          url: "/api/groups"
+          expect:
+            - statusCode: 200
+
+  - name: "Profile Operations"
+    weight: 10
+    flow:
+      # Login
+      - post:
+          url: "/api/auth/login"
+          json:
+            email: "slanesh@gmail.com"
+            password: "Slanesh@5002"
+          expect:
+            - statusCode: 200
+      # Update profile
+      - put:
+          url: "/api/auth/update-profile"
+          json:
+            fullName: "Updated User {{ $randomString() }}"
+          expect:
+            - statusCode: 200
+      # Check auth status
+      - get:
+          url: "/api/auth/check"
+          expect:
+            - statusCode: 200

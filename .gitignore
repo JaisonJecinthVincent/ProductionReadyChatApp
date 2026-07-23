@@ -1,0 +1,72 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Environment variables (contains secrets)
+.env
+backend/.env
+frontend/.env
+
+# Test and debug files
+test-*.js
+*-test.js
+test-debug.js
+backend/test-*.js
+backend/*-test.js
+backend/bull-*.js
+backend/stress-*.js
+backend/simple-bull-test.js
+backend/check-mark-user.js
+backend/create-test-user.js
+backend/create-test-users.js
+backend/testENV.js
+backend/queue-cleaner.js
+
+# Load testing configs (can be committed if needed, but excluded to avoid confusion)
+*.yml
+!loadtest.yml
+!.github/**/*.yml
+
+# Build artifacts and dependencies
+package-lock.json
+backend/package-lock.json
+frontend/package-lock.json
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# IDE files
+.vscode/settings.json
+.idea/
+
+# Coverage and test results
+coverage/
+.nyc_output/
+*.lcov
+
+# Temporary files
+*.tmp
+*.temp
+.cache/

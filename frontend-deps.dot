@@ -1,0 +1,230 @@
+﻿strict digraph "dependency-cruiser output"{
+    rankdir="LR" splines="true" overlap="false" nodesep="0.16" ranksep="0.18" fontname="Helvetica-bold" fontsize="9" style="rounded,bold,filled" fillcolor="#ffffff" compound="true"
+    node [shape="box" style="rounded, filled" height="0.2" color="black" fillcolor="#ffffcc" fontcolor="black" fontname="Helvetica" fontsize="9"]
+    edge [arrowhead="normal" arrowsize="0.6" penwidth="2.0" color="#00000033" fontname="Helvetica" fontsize="9"]
+
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" "frontend/src/App.jsx" [label=<App.jsx> tooltip="App.jsx" URL="frontend/src/App.jsx" fillcolor="#ffff77"] } }
+    "frontend/src/App.jsx" -> "frontend/src/components/Navbar.jsx"
+    "frontend/src/App.jsx" -> "frontend/src/pages/HomePage.jsx"
+    "frontend/src/App.jsx" -> "frontend/src/pages/LoginPage.jsx"
+    "frontend/src/App.jsx" -> "frontend/src/pages/OAuthCallback.jsx"
+    "frontend/src/App.jsx" -> "frontend/src/pages/ProfilePage.jsx"
+    "frontend/src/App.jsx" -> "frontend/src/pages/SettingsPage.jsx"
+    "frontend/src/App.jsx" -> "frontend/src/pages/SignUpPage.jsx"
+    "frontend/src/App.jsx" -> "frontend/src/store/useAuthStore.js"
+    "frontend/src/App.jsx" -> "frontend/src/store/useThemeStore.js"
+    "frontend/src/App.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    "frontend/src/App.jsx" -> "node_modules/react" [penwidth="1.0"]
+    "frontend/src/App.jsx" -> "node_modules/react-hot-toast" [penwidth="1.0"]
+    "frontend/src/App.jsx" -> "node_modules/react-router-dom" [penwidth="1.0"]
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/components" {label="components" "frontend/src/components/AuthImagePattern.jsx" [label=<AuthImagePattern.jsx> tooltip="AuthImagePattern.jsx" URL="frontend/src/components/AuthImagePattern.jsx" fillcolor="#ffff77"] } } }
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/components" {label="components" "frontend/src/components/ChatContainer.jsx" [label=<ChatContainer.jsx> tooltip="ChatContainer.jsx" URL="frontend/src/components/ChatContainer.jsx" fillcolor="#ffff77"] } } }
+    "frontend/src/components/ChatContainer.jsx" -> "frontend/src/lib/axios.js"
+    "frontend/src/components/ChatContainer.jsx" -> "frontend/src/lib/cloudinaryUtils.js"
+    "frontend/src/components/ChatContainer.jsx" -> "frontend/src/lib/utils.js"
+    "frontend/src/components/ChatContainer.jsx" -> "frontend/src/store/useAuthStore.js"
+    "frontend/src/components/ChatContainer.jsx" -> "frontend/src/store/useChatStore.js"
+    "frontend/src/components/ChatContainer.jsx" -> "frontend/src/components/ChatHeader.jsx"
+    "frontend/src/components/ChatContainer.jsx" -> "frontend/src/components/DateSeparator.jsx"
+    "frontend/src/components/ChatContainer.jsx" -> "frontend/src/components/FileMessage.jsx"
+    "frontend/src/components/ChatContainer.jsx" -> "frontend/src/components/MediaGallery.jsx"
+    "frontend/src/components/ChatContainer.jsx" -> "frontend/src/components/MessageActions.jsx"
+    "frontend/src/components/ChatContainer.jsx" -> "frontend/src/components/MessageEditModal.jsx"
+    "frontend/src/components/ChatContainer.jsx" -> "frontend/src/components/MessageInput.jsx"
+    "frontend/src/components/ChatContainer.jsx" -> "frontend/src/components/MessageReactions.jsx"
+    "frontend/src/components/ChatContainer.jsx" -> "frontend/src/components/MessageReplyContext.jsx"
+    "frontend/src/components/ChatContainer.jsx" -> "frontend/src/components/MessageTimestamp.jsx"
+    "frontend/src/components/ChatContainer.jsx" -> "frontend/src/components/skeletons/MessageSkeleton.jsx"
+    "frontend/src/components/ChatContainer.jsx" -> "node_modules/date-fns" [penwidth="1.0"]
+    "frontend/src/components/ChatContainer.jsx" -> "node_modules/react" [penwidth="1.0"]
+    "frontend/src/components/ChatContainer.jsx" -> "node_modules/react-hot-toast" [penwidth="1.0"]
+    "frontend/src/components/ChatContainer.jsx" -> "node_modules/react-router-dom" [penwidth="1.0"]
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/components" {label="components" "frontend/src/components/ChatHeader.jsx" [label=<ChatHeader.jsx> tooltip="ChatHeader.jsx" URL="frontend/src/components/ChatHeader.jsx" fillcolor="#ffff77"] } } }
+    "frontend/src/components/ChatHeader.jsx" -> "frontend/src/lib/cloudinaryUtils.js"
+    "frontend/src/components/ChatHeader.jsx" -> "frontend/src/store/useAuthStore.js"
+    "frontend/src/components/ChatHeader.jsx" -> "frontend/src/store/useChatStore.js"
+    "frontend/src/components/ChatHeader.jsx" -> "frontend/src/components/GroupSettingsModal.jsx"
+    "frontend/src/components/ChatHeader.jsx" -> "frontend/src/components/MessageSearch.jsx"
+    "frontend/src/components/ChatHeader.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    "frontend/src/components/ChatHeader.jsx" -> "node_modules/react" [penwidth="1.0"]
+    "frontend/src/components/ChatHeader.jsx" -> "node_modules/react-router-dom" [penwidth="1.0"]
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/components" {label="components" "frontend/src/components/ConfirmationModal.jsx" [label=<ConfirmationModal.jsx> tooltip="ConfirmationModal.jsx" URL="frontend/src/components/ConfirmationModal.jsx" fillcolor="#ffff77"] } } }
+    "frontend/src/components/ConfirmationModal.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/components" {label="components" "frontend/src/components/CreateGroupModal.jsx" [label=<CreateGroupModal.jsx> tooltip="CreateGroupModal.jsx" URL="frontend/src/components/CreateGroupModal.jsx" fillcolor="#ffff77"] } } }
+    "frontend/src/components/CreateGroupModal.jsx" -> "frontend/src/lib/axios.js"
+    "frontend/src/components/CreateGroupModal.jsx" -> "frontend/src/lib/cloudinaryUtils.js"
+    "frontend/src/components/CreateGroupModal.jsx" -> "frontend/src/store/useAuthStore.js"
+    "frontend/src/components/CreateGroupModal.jsx" -> "frontend/src/store/useChatStore.js"
+    "frontend/src/components/CreateGroupModal.jsx" -> "node_modules/react" [penwidth="1.0"]
+    "frontend/src/components/CreateGroupModal.jsx" -> "node_modules/react-hot-toast" [penwidth="1.0"]
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/components" {label="components" "frontend/src/components/DateSeparator.jsx" [label=<DateSeparator.jsx> tooltip="DateSeparator.jsx" URL="frontend/src/components/DateSeparator.jsx" fillcolor="#ffff77"] } } }
+    "frontend/src/components/DateSeparator.jsx" -> "node_modules/date-fns" [penwidth="1.0"]
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/components" {label="components" "frontend/src/components/EmojiPicker.jsx" [label=<EmojiPicker.jsx> tooltip="EmojiPicker.jsx" URL="frontend/src/components/EmojiPicker.jsx" fillcolor="#ffff77"] } } }
+    "frontend/src/components/EmojiPicker.jsx" -> "frontend/src/store/useThemeStore.js"
+    "frontend/src/components/EmojiPicker.jsx" -> "node_modules/emoji-picker-react" [penwidth="1.0"]
+    "frontend/src/components/EmojiPicker.jsx" -> "node_modules/react" [penwidth="1.0"]
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/components" {label="components" "frontend/src/components/FileMessage.jsx" [label=<FileMessage.jsx> tooltip="FileMessage.jsx" URL="frontend/src/components/FileMessage.jsx" fillcolor="#ffff77"] } } }
+    "frontend/src/components/FileMessage.jsx" -> "node_modules/date-fns" [penwidth="1.0"]
+    "frontend/src/components/FileMessage.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    "frontend/src/components/FileMessage.jsx" -> "node_modules/react" [penwidth="1.0"]
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/components" {label="components" "frontend/src/components/FileUpload.jsx" [label=<FileUpload.jsx> tooltip="FileUpload.jsx" URL="frontend/src/components/FileUpload.jsx" fillcolor="#ffff77"] } } }
+    "frontend/src/components/FileUpload.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    "frontend/src/components/FileUpload.jsx" -> "node_modules/react" [penwidth="1.0"]
+    "frontend/src/components/FileUpload.jsx" -> "node_modules/react-hot-toast" [penwidth="1.0"]
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/components" {label="components" "frontend/src/components/GroupSearchModal.jsx" [label=<GroupSearchModal.jsx> tooltip="GroupSearchModal.jsx" URL="frontend/src/components/GroupSearchModal.jsx" fillcolor="#ffff77"] } } }
+    "frontend/src/components/GroupSearchModal.jsx" -> "frontend/src/lib/axios.js"
+    "frontend/src/components/GroupSearchModal.jsx" -> "frontend/src/lib/cloudinaryUtils.js"
+    "frontend/src/components/GroupSearchModal.jsx" -> "frontend/src/store/useAuthStore.js"
+    "frontend/src/components/GroupSearchModal.jsx" -> "frontend/src/store/useChatStore.js"
+    "frontend/src/components/GroupSearchModal.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    "frontend/src/components/GroupSearchModal.jsx" -> "node_modules/react" [penwidth="1.0"]
+    "frontend/src/components/GroupSearchModal.jsx" -> "node_modules/react-hot-toast" [penwidth="1.0"]
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/components" {label="components" "frontend/src/components/GroupSettingsModal.jsx" [label=<GroupSettingsModal.jsx> tooltip="GroupSettingsModal.jsx" URL="frontend/src/components/GroupSettingsModal.jsx" fillcolor="#ffff77"] } } }
+    "frontend/src/components/GroupSettingsModal.jsx" -> "frontend/src/lib/cloudinaryUtils.js"
+    "frontend/src/components/GroupSettingsModal.jsx" -> "frontend/src/store/useAuthStore.js"
+    "frontend/src/components/GroupSettingsModal.jsx" -> "frontend/src/store/useChatStore.js"
+    "frontend/src/components/GroupSettingsModal.jsx" -> "frontend/src/components/ConfirmationModal.jsx"
+    "frontend/src/components/GroupSettingsModal.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    "frontend/src/components/GroupSettingsModal.jsx" -> "node_modules/react" [penwidth="1.0"]
+    "frontend/src/components/GroupSettingsModal.jsx" -> "node_modules/react-hot-toast" [penwidth="1.0"]
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/components" {label="components" "frontend/src/components/MediaGallery.jsx" [label=<MediaGallery.jsx> tooltip="MediaGallery.jsx" URL="frontend/src/components/MediaGallery.jsx" fillcolor="#ffff77"] } } }
+    "frontend/src/components/MediaGallery.jsx" -> "frontend/src/lib/cloudinaryUtils.js"
+    "frontend/src/components/MediaGallery.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    "frontend/src/components/MediaGallery.jsx" -> "node_modules/react" [penwidth="1.0"]
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/components" {label="components" "frontend/src/components/MessageActions.jsx" [label=<MessageActions.jsx> tooltip="MessageActions.jsx" URL="frontend/src/components/MessageActions.jsx" fillcolor="#ffff77"] } } }
+    "frontend/src/components/MessageActions.jsx" -> "frontend/src/store/useAuthStore.js"
+    "frontend/src/components/MessageActions.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    "frontend/src/components/MessageActions.jsx" -> "node_modules/react" [penwidth="1.0"]
+    "frontend/src/components/MessageActions.jsx" -> "node_modules/react-hot-toast" [penwidth="1.0"]
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/components" {label="components" "frontend/src/components/MessageEditModal.jsx" [label=<MessageEditModal.jsx> tooltip="MessageEditModal.jsx" URL="frontend/src/components/MessageEditModal.jsx" fillcolor="#ffff77"] } } }
+    "frontend/src/components/MessageEditModal.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    "frontend/src/components/MessageEditModal.jsx" -> "node_modules/react" [penwidth="1.0"]
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/components" {label="components" "frontend/src/components/MessageInput.jsx" [label=<MessageInput.jsx> tooltip="MessageInput.jsx" URL="frontend/src/components/MessageInput.jsx" fillcolor="#ffff77"] } } }
+    "frontend/src/components/MessageInput.jsx" -> "frontend/src/lib/axios.js"
+    "frontend/src/components/MessageInput.jsx" -> "frontend/src/store/useChatStore.js"
+    "frontend/src/components/MessageInput.jsx" -> "frontend/src/components/EmojiPicker.jsx"
+    "frontend/src/components/MessageInput.jsx" -> "frontend/src/components/FileUpload.jsx"
+    "frontend/src/components/MessageInput.jsx" -> "frontend/src/components/MessageReplyContext.jsx"
+    "frontend/src/components/MessageInput.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    "frontend/src/components/MessageInput.jsx" -> "node_modules/react" [penwidth="1.0"]
+    "frontend/src/components/MessageInput.jsx" -> "node_modules/react-hot-toast" [penwidth="1.0"]
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/components" {label="components" "frontend/src/components/MessageReactions.jsx" [label=<MessageReactions.jsx> tooltip="MessageReactions.jsx" URL="frontend/src/components/MessageReactions.jsx" fillcolor="#ffff77"] } } }
+    "frontend/src/components/MessageReactions.jsx" -> "frontend/src/lib/axios.js"
+    "frontend/src/components/MessageReactions.jsx" -> "frontend/src/store/useAuthStore.js"
+    "frontend/src/components/MessageReactions.jsx" -> "frontend/src/store/useChatStore.js"
+    "frontend/src/components/MessageReactions.jsx" -> "node_modules/react" [penwidth="1.0"]
+    "frontend/src/components/MessageReactions.jsx" -> "node_modules/react-hot-toast" [penwidth="1.0"]
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/components" {label="components" "frontend/src/components/MessageReplyContext.jsx" [label=<MessageReplyContext.jsx> tooltip="MessageReplyContext.jsx" URL="frontend/src/components/MessageReplyContext.jsx" fillcolor="#ffff77"] } } }
+    "frontend/src/components/MessageReplyContext.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/components" {label="components" "frontend/src/components/MessageSearch.jsx" [label=<MessageSearch.jsx> tooltip="MessageSearch.jsx" URL="frontend/src/components/MessageSearch.jsx" fillcolor="#ffff77"] } } }
+    "frontend/src/components/MessageSearch.jsx" -> "node_modules/date-fns" [penwidth="1.0"]
+    "frontend/src/components/MessageSearch.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    "frontend/src/components/MessageSearch.jsx" -> "node_modules/react" [penwidth="1.0"]
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/components" {label="components" "frontend/src/components/MessageTimestamp.jsx" [label=<MessageTimestamp.jsx> tooltip="MessageTimestamp.jsx" URL="frontend/src/components/MessageTimestamp.jsx" fillcolor="#ffff77"] } } }
+    "frontend/src/components/MessageTimestamp.jsx" -> "node_modules/date-fns" [penwidth="1.0"]
+    "frontend/src/components/MessageTimestamp.jsx" -> "node_modules/react" [penwidth="1.0"]
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/components" {label="components" "frontend/src/components/Navbar.jsx" [label=<Navbar.jsx> tooltip="Navbar.jsx" URL="frontend/src/components/Navbar.jsx" fillcolor="#ffff77"] } } }
+    "frontend/src/components/Navbar.jsx" -> "frontend/src/store/useAuthStore.js"
+    "frontend/src/components/Navbar.jsx" -> "frontend/src/components/ThemeToggle.jsx"
+    "frontend/src/components/Navbar.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    "frontend/src/components/Navbar.jsx" -> "node_modules/react-router-dom" [penwidth="1.0"]
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/components" {label="components" "frontend/src/components/NoChatSelected.jsx" [label=<NoChatSelected.jsx> tooltip="NoChatSelected.jsx" URL="frontend/src/components/NoChatSelected.jsx" fillcolor="#ffff77"] } } }
+    "frontend/src/components/NoChatSelected.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/components" {label="components" "frontend/src/components/OAuthAccountManager.jsx" [label=<OAuthAccountManager.jsx> tooltip="OAuthAccountManager.jsx" URL="frontend/src/components/OAuthAccountManager.jsx" fillcolor="#ffff77"] } } }
+    "frontend/src/components/OAuthAccountManager.jsx" -> "frontend/src/store/useAuthStore.js"
+    "frontend/src/components/OAuthAccountManager.jsx" -> "node_modules/react" [penwidth="1.0"]
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/components" {label="components" "frontend/src/components/OAuthLogin.jsx" [label=<OAuthLogin.jsx> tooltip="OAuthLogin.jsx" URL="frontend/src/components/OAuthLogin.jsx" fillcolor="#ffff77"] } } }
+    "frontend/src/components/OAuthLogin.jsx" -> "frontend/src/lib/axios.js"
+    "frontend/src/components/OAuthLogin.jsx" -> "node_modules/react" [penwidth="1.0"]
+    "frontend/src/components/OAuthLogin.jsx" -> "node_modules/react-router-dom" [penwidth="1.0"]
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/components" {label="components" "frontend/src/components/OnlineStatusIndicator.jsx" [label=<OnlineStatusIndicator.jsx> tooltip="OnlineStatusIndicator.jsx" URL="frontend/src/components/OnlineStatusIndicator.jsx" fillcolor="#ffff77"] } } }
+    "frontend/src/components/OnlineStatusIndicator.jsx" -> "node_modules/date-fns" [penwidth="1.0"]
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/components" {label="components" "frontend/src/components/Sidebar.jsx" [label=<Sidebar.jsx> tooltip="Sidebar.jsx" URL="frontend/src/components/Sidebar.jsx" fillcolor="#ffff77"] } } }
+    "frontend/src/components/Sidebar.jsx" -> "frontend/src/lib/cloudinaryUtils.js"
+    "frontend/src/components/Sidebar.jsx" -> "frontend/src/store/useAuthStore.js"
+    "frontend/src/components/Sidebar.jsx" -> "frontend/src/store/useChatStore.js"
+    "frontend/src/components/Sidebar.jsx" -> "frontend/src/components/CreateGroupModal.jsx"
+    "frontend/src/components/Sidebar.jsx" -> "frontend/src/components/GroupSearchModal.jsx"
+    "frontend/src/components/Sidebar.jsx" -> "frontend/src/components/OnlineStatusIndicator.jsx"
+    "frontend/src/components/Sidebar.jsx" -> "frontend/src/components/skeletons/SidebarSkeleton.jsx"
+    "frontend/src/components/Sidebar.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    "frontend/src/components/Sidebar.jsx" -> "node_modules/react" [penwidth="1.0"]
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/components" {label="components" "frontend/src/components/ThemeToggle.jsx" [label=<ThemeToggle.jsx> tooltip="ThemeToggle.jsx" URL="frontend/src/components/ThemeToggle.jsx" fillcolor="#ffff77"] } } }
+    "frontend/src/components/ThemeToggle.jsx" -> "frontend/src/store/useThemeStore.js"
+    "frontend/src/components/ThemeToggle.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/components" {label="components" subgraph "cluster_frontend/src/components/skeletons" {label="skeletons" "frontend/src/components/skeletons/MessageSkeleton.jsx" [label=<MessageSkeleton.jsx> tooltip="MessageSkeleton.jsx" URL="frontend/src/components/skeletons/MessageSkeleton.jsx" fillcolor="#ffff77"] } } } }
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/components" {label="components" subgraph "cluster_frontend/src/components/skeletons" {label="skeletons" "frontend/src/components/skeletons/SidebarSkeleton.jsx" [label=<SidebarSkeleton.jsx> tooltip="SidebarSkeleton.jsx" URL="frontend/src/components/skeletons/SidebarSkeleton.jsx" fillcolor="#ffff77"] } } } }
+    "frontend/src/components/skeletons/SidebarSkeleton.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/constants" {label="constants" "frontend/src/constants/index.js" [label=<index.js> tooltip="index.js" URL="frontend/src/constants/index.js" ] } } }
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" "frontend/src/index.css" [label=<index.css> tooltip="index.css" URL="frontend/src/index.css" ] } }
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/lib" {label="lib" "frontend/src/lib/axios.js" [label=<axios.js> tooltip="axios.js" URL="frontend/src/lib/axios.js" ] } } }
+    "frontend/src/lib/axios.js" -> "node_modules/axios" [penwidth="1.0"]
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/lib" {label="lib" "frontend/src/lib/cloudinaryUtils.js" [label=<cloudinaryUtils.js> tooltip="cloudinaryUtils.js" URL="frontend/src/lib/cloudinaryUtils.js" ] } } }
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/lib" {label="lib" "frontend/src/lib/utils.js" [label=<utils.js> tooltip="utils.js" URL="frontend/src/lib/utils.js" ] } } }
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" "frontend/src/main.jsx" [label=<main.jsx> tooltip="main.jsx" URL="frontend/src/main.jsx" fillcolor="#ffff77"] } }
+    "frontend/src/main.jsx" -> "frontend/src/App.jsx"
+    "frontend/src/main.jsx" -> "frontend/src/index.css"
+    "frontend/src/main.jsx" -> "node_modules/react" [penwidth="1.0"]
+    "frontend/src/main.jsx" -> "node_modules/react-dom" [penwidth="1.0"]
+    "frontend/src/main.jsx" -> "node_modules/react-router-dom" [penwidth="1.0"]
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/pages" {label="pages" "frontend/src/pages/HomePage.jsx" [label=<HomePage.jsx> tooltip="HomePage.jsx" URL="frontend/src/pages/HomePage.jsx" fillcolor="#ffff77"] } } }
+    "frontend/src/pages/HomePage.jsx" -> "frontend/src/components/ChatContainer.jsx"
+    "frontend/src/pages/HomePage.jsx" -> "frontend/src/components/NoChatSelected.jsx"
+    "frontend/src/pages/HomePage.jsx" -> "frontend/src/components/Sidebar.jsx"
+    "frontend/src/pages/HomePage.jsx" -> "frontend/src/store/useChatStore.js"
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/pages" {label="pages" "frontend/src/pages/LoginPage.jsx" [label=<LoginPage.jsx> tooltip="LoginPage.jsx" URL="frontend/src/pages/LoginPage.jsx" fillcolor="#ffff77"] } } }
+    "frontend/src/pages/LoginPage.jsx" -> "frontend/src/components/AuthImagePattern.jsx"
+    "frontend/src/pages/LoginPage.jsx" -> "frontend/src/components/OAuthLogin.jsx"
+    "frontend/src/pages/LoginPage.jsx" -> "frontend/src/store/useAuthStore.js"
+    "frontend/src/pages/LoginPage.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    "frontend/src/pages/LoginPage.jsx" -> "node_modules/react" [penwidth="1.0"]
+    "frontend/src/pages/LoginPage.jsx" -> "node_modules/react-router-dom" [penwidth="1.0"]
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/pages" {label="pages" "frontend/src/pages/OAuthCallback.jsx" [label=<OAuthCallback.jsx> tooltip="OAuthCallback.jsx" URL="frontend/src/pages/OAuthCallback.jsx" fillcolor="#ffff77"] } } }
+    "frontend/src/pages/OAuthCallback.jsx" -> "frontend/src/store/useAuthStore.js"
+    "frontend/src/pages/OAuthCallback.jsx" -> "node_modules/react" [penwidth="1.0"]
+    "frontend/src/pages/OAuthCallback.jsx" -> "node_modules/react-router-dom" [penwidth="1.0"]
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/pages" {label="pages" "frontend/src/pages/ProfilePage.jsx" [label=<ProfilePage.jsx> tooltip="ProfilePage.jsx" URL="frontend/src/pages/ProfilePage.jsx" fillcolor="#ffff77"] } } }
+    "frontend/src/pages/ProfilePage.jsx" -> "frontend/src/lib/cloudinaryUtils.js"
+    "frontend/src/pages/ProfilePage.jsx" -> "frontend/src/store/useAuthStore.js"
+    "frontend/src/pages/ProfilePage.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    "frontend/src/pages/ProfilePage.jsx" -> "node_modules/react" [penwidth="1.0"]
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/pages" {label="pages" "frontend/src/pages/SettingsPage.jsx" [label=<SettingsPage.jsx> tooltip="SettingsPage.jsx" URL="frontend/src/pages/SettingsPage.jsx" fillcolor="#ffff77"] } } }
+    "frontend/src/pages/SettingsPage.jsx" -> "frontend/src/constants/index.js"
+    "frontend/src/pages/SettingsPage.jsx" -> "frontend/src/store/useThemeStore.js"
+    "frontend/src/pages/SettingsPage.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/pages" {label="pages" "frontend/src/pages/SignUpPage.jsx" [label=<SignUpPage.jsx> tooltip="SignUpPage.jsx" URL="frontend/src/pages/SignUpPage.jsx" fillcolor="#ffff77"] } } }
+    "frontend/src/pages/SignUpPage.jsx" -> "frontend/src/components/AuthImagePattern.jsx"
+    "frontend/src/pages/SignUpPage.jsx" -> "frontend/src/components/OAuthLogin.jsx"
+    "frontend/src/pages/SignUpPage.jsx" -> "frontend/src/store/useAuthStore.js"
+    "frontend/src/pages/SignUpPage.jsx" -> "node_modules/lucide-react" [penwidth="1.0"]
+    "frontend/src/pages/SignUpPage.jsx" -> "node_modules/react" [penwidth="1.0"]
+    "frontend/src/pages/SignUpPage.jsx" -> "node_modules/react-hot-toast" [penwidth="1.0"]
+    "frontend/src/pages/SignUpPage.jsx" -> "node_modules/react-router-dom" [penwidth="1.0"]
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/store" {label="store" "frontend/src/store/useAuthStore.js" [label=<useAuthStore.js> tooltip="useAuthStore.js" URL="frontend/src/store/useAuthStore.js" ] } } }
+    "frontend/src/store/useAuthStore.js" -> "frontend/src/lib/axios.js"
+    "frontend/src/store/useAuthStore.js" -> "node_modules/react-hot-toast" [penwidth="1.0"]
+    "frontend/src/store/useAuthStore.js" -> "node_modules/socket.io-client" [penwidth="1.0"]
+    "frontend/src/store/useAuthStore.js" -> "node_modules/zustand" [penwidth="1.0"]
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/store" {label="store" "frontend/src/store/useChatStore.js" [label=<useChatStore.js> tooltip="useChatStore.js" URL="frontend/src/store/useChatStore.js" ] } } }
+    "frontend/src/store/useChatStore.js" -> "frontend/src/lib/axios.js"
+    "frontend/src/store/useChatStore.js" -> "frontend/src/store/useAuthStore.js"
+    "frontend/src/store/useChatStore.js" -> "node_modules/react-hot-toast" [penwidth="1.0"]
+    "frontend/src/store/useChatStore.js" -> "node_modules/zustand" [penwidth="1.0"]
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/store" {label="store" "frontend/src/store/useThemeStore.js" [label=<useThemeStore.js> tooltip="useThemeStore.js" URL="frontend/src/store/useThemeStore.js" ] } } }
+    "frontend/src/store/useThemeStore.js" -> "node_modules/zustand" [penwidth="1.0"]
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" "frontend/src/test-fixes.js" [label=<test-fixes.js> tooltip="no-orphans" URL="frontend/src/test-fixes.js" fillcolor="#ccffcc" fontcolor="orange" color="orange"] } }
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/test" {label="test" "frontend/src/test/FileUploadFix.js" [label=<FileUploadFix.js> tooltip="no-orphans" URL="frontend/src/test/FileUploadFix.js" fillcolor="#ccffcc" fontcolor="orange" color="orange"] } } }
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/test" {label="test" "frontend/src/test/ReplyFunctionalityTest.js" [label=<ReplyFunctionalityTest.js> tooltip="no-orphans" URL="frontend/src/test/ReplyFunctionalityTest.js" fillcolor="#ccffcc" fontcolor="orange" color="orange"] } } }
+    subgraph "cluster_frontend" {label="frontend" subgraph "cluster_frontend/src" {label="src" subgraph "cluster_frontend/src/utils" {label="utils" "frontend/src/utils/ConnectionHealthChecker.js" [label=<ConnectionHealthChecker.js> tooltip="ConnectionHealthChecker.js" URL="frontend/src/utils/ConnectionHealthChecker.js" ] } } }
+    "frontend/src/utils/ConnectionHealthChecker.js" -> "frontend/src/lib/axios.js"
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/axios" [label=<axios> tooltip="axios" URL="https://www.npmjs.com/package/axios" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/date-fns" [label=<date-fns> tooltip="date-fns" URL="https://www.npmjs.com/package/date-fns" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/emoji-picker-react" [label=<emoji-picker-react> tooltip="emoji-picker-react" URL="https://www.npmjs.com/package/emoji-picker-react" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/lucide-react" [label=<lucide-react> tooltip="lucide-react" URL="https://www.npmjs.com/package/lucide-react" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/react" [label=<react> tooltip="react" URL="https://www.npmjs.com/package/react" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/react-dom" [label=<react-dom> tooltip="react-dom" URL="https://www.npmjs.com/package/react-dom" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/react-hot-toast" [label=<react-hot-toast> tooltip="react-hot-toast" URL="https://www.npmjs.com/package/react-hot-toast" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/react-router-dom" [label=<react-router-dom> tooltip="react-router-dom" URL="https://www.npmjs.com/package/react-router-dom" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/socket.io-client" [label=<socket.io-client> tooltip="socket.io-client" URL="https://www.npmjs.com/package/socket.io-client" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+    subgraph "cluster_node_modules" {label="node_modules" "node_modules/zustand" [label=<zustand> tooltip="zustand" URL="https://www.npmjs.com/package/zustand" shape="box3d" fillcolor="#c40b0a1a" fontcolor="#c40b0a"] }
+}

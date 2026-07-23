@@ -1,0 +1,8 @@
+packages:
+  - 'backend'
+  - 'frontend'
+
+onlyBuiltDependencies: []
+
+minimumReleaseAge: 10080
+trustPolicy: no-downgrade
