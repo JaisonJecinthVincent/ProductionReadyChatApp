@@ -6,6 +6,15 @@ import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import User from '../models/user.model.js';
 import jwt from 'jsonwebtoken';
 
+// Trim whitespace/newlines from env vars (common copy-paste issue)
+const googleClientId = (process.env.GOOGLE_CLIENT_ID || '').trim();
+const googleClientSecret = (process.env.GOOGLE_CLIENT_SECRET || '').trim();
+const googleCallbackUrl = (process.env.GOOGLE_CALLBACK_URL || '').trim();
+
+console.log(`🔍 GOOGLE_CLIENT_ID length: ${googleClientId.length}, starts with: ${googleClientId.substring(0, 10)}...`);
+console.log(`🔍 GOOGLE_CLIENT_SECRET length: ${googleClientSecret.length}, starts with: ${googleClientSecret.substring(0, 6)}...`);
+console.log(`🔍 GOOGLE_CALLBACK_URL: ${googleCallbackUrl}`);
+
 // Serialize user for session
 passport.serializeUser((user, done) => {
   done(null, user._id);
@@ -98,11 +107,11 @@ const createOrUpdateUser = async (profile, provider, accessToken, refreshToken) 
 };
 
 // Google OAuth Strategy - only initialize if credentials are provided
-if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
+if (googleClientId && googleClientSecret) {
   passport.use(new GoogleStrategy({
-    clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: process.env.GOOGLE_CALLBACK_URL || "/api/auth/oauth/google/callback"
+    clientID: googleClientId,
+    clientSecret: googleClientSecret,
+    callbackURL: googleCallbackUrl || "/api/auth/oauth/google/callback"
   }, async (accessToken, refreshToken, profile, done) => {
     try {
       const user = await createOrUpdateUser(profile, 'google', accessToken, refreshToken);
