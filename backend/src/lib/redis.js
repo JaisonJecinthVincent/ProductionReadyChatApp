@@ -48,11 +48,14 @@ redis.on('connect', () => {
   console.log('✅ Redis connected successfully');
 });
 
-redis.on('ready', () => {
+redis.on('ready', async () => {
   console.log('✅ Redis ready to accept commands');
-  // Set Redis configuration for better performance
-  redis.config('SET', 'maxmemory-policy', 'allkeys-lru');
-  redis.config('SET', 'tcp-keepalive', '60');
+  try {
+    await redis.config('SET', 'maxmemory-policy', 'allkeys-lru');
+    await redis.config('SET', 'tcp-keepalive', '60');
+  } catch (err) {
+    console.warn('⚠️ Could not set Redis CONFIG (managed Redis may not support this):', err.message);
+  }
 });
 
 redis.on('error', (err) => {
