@@ -41,7 +41,7 @@ class RedisPool {
 }
 
 // Create connection pool
-const redisPool = new RedisPool(parseInt(process.env.REDIS_POOL_SIZE) || 10);
+const redisPool = new RedisPool(parseInt(process.env.REDIS_POOL_SIZE) || 3);
 
 // Handle Redis connection events
 redis.on('connect', () => {

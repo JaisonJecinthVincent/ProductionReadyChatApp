@@ -1,16 +1,38 @@
 import Bull from 'bull';
-import { bullRedisConfig } from '../config/redis.config.js';
+import Redis from 'ioredis';
+import { redisConfig } from '../config/redis.config.js';
 
 // Server identification for scaling
 const SERVER_ID = process.env.SERVER_ID || `server-${Math.random().toString(36).substring(7)}`;
 console.log(`🚀 Queue system initialized for ${SERVER_ID}`);
 
-// Create specialized queues for different types of operations using Bull-compatible config
-export const messageQueue = new Bull('message processing', bullRedisConfig);
-export const groupMessageQueue = new Bull('group message processing', bullRedisConfig);
-export const imageProcessingQueue = new Bull('image processing', bullRedisConfig);
-export const notificationQueue = new Bull('notification processing', bullRedisConfig);
-export const emailQueue = new Bull('email processing', bullRedisConfig);
+// Shared Redis connections for all Bull queues (avoids max connections issue on managed Redis)
+const sharedRedisOpts = {
+  host: redisConfig.host,
+  port: redisConfig.port,
+  password: redisConfig.password,
+  db: redisConfig.db,
+  tls: redisConfig.tls,
+  maxRetriesPerRequest: 3,
+  enableReadyCheck: true,
+};
+
+const connectionMap = {};
+const createClient = (type) => {
+  if (!connectionMap[type]) {
+    connectionMap[type] = new Redis(sharedRedisOpts);
+  }
+  return connectionMap[type];
+};
+
+const queueOpts = { createClient };
+
+// Create specialized queues sharing Redis connections
+export const messageQueue = new Bull('message processing', queueOpts);
+export const groupMessageQueue = new Bull('group message processing', queueOpts);
+export const imageProcessingQueue = new Bull('image processing', queueOpts);
+export const notificationQueue = new Bull('notification processing', queueOpts);
+export const emailQueue = new Bull('email processing', queueOpts);
 
 // Add error handling for all queues
 const addQueueErrorHandling = (queue, queueName) => {
